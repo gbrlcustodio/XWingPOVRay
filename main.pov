@@ -3,11 +3,11 @@
 #include "xwing.inc"
 
 camera {
-	location <11,0,3>
+	location <0,15,-25>
 	look_at  <0,0,0>
-	rotate <30,30,0>
+	rotate <0,-160,0>
 }
 
 light_source {<0,5,0> color White}
 
-object {gun}
+object {wing translate <0,0,0>}
