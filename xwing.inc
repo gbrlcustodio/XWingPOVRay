@@ -16,16 +16,6 @@
   finish {ambient 0.2 diffuse 0.7}
   normal {dents 0.25 scale 0.25}
   scale 0.5
-} texture {
-  pigment {
-    bozo
-    turbulence 0.3
-    color_map {
-      [0.00 color rgbf <0.05, 0.05, 0.05, 0.7>]
-      [0.2 color rgbt 1]
-      [1.00 color rgbt 1]
-    }
-  }
 }
 
 #declare xw_texture2 = texture {
@@ -117,7 +107,6 @@
 	object {cylinder {<0,0,5>, <0,0,8.5>, 0.15} texture {xw_texture1}}
 	object {cylinder {<0,0,8.5>, <0,0,11>, 0.06} texture {xw_texture1}}
 	object {cylinder {<0,0,8.3>, <0,0,8.5>, 0.2} texture {xw_texture1}}
-	/* object {cylinder {<0,0,8.25>, <0,0,8.5>, 0.3} texture {xw_texture1}} */
 	object {cone {<0,0,8.25>, 0.3, <0,0,8.5> 0.2} texture {xw_texture1}}
 	object {
 	  difference {
@@ -138,7 +127,6 @@
 		object {cylinder {<0,0,0>, <4.5,0,0>, 5}}
 		object {cone {<4.5,0,0>, 5.5, <13.5,0,0>, 5}}
 	  }
-	  scale <1,100,1>
 	}
   }
   texture {
@@ -260,46 +248,6 @@
 	  }
 	}
 	object {cone {z, 0, -1.5*z, 1} pigment {color rgb 0.05}}
-	/* object { */
-	/*   intersection { */
-	/*     object { */
-	/*       difference { */
-	/*         object {cylinder {<0,0,-4>, <0,0,0>, 1.075} pigment {color Green}} */
-	/*         object {cylinder {<0,0,-4.1>, <0,0,0.1>, 0.9}} */
-	/*       } */
-	/*     } */
-	/*     object { */
-	/*       union { */
-	/*         object {box {<-2, -0.5, -2.3>, <0, 0.3, -1.5>} rotate <0,0,-45> scale <1,1,1>} */
-	/*         object {box {<-2, -0.5, -2.3>, <0, 0.3, -1.5>} rotate <0,0,-45> scale <-1,1,1>} */
-	/*         object {box {<-2, -0.5, -3.3>, <0, 0.3, -2.5>} rotate <0,0,-45> scale <1,1,1>} */
-	/*         object {box {<-2, -0.5, -3.3>, <0, 0.3, -2.5>} rotate <0,0,-45> scale <-1,1,1>} */
-	/*         object {box {<-0.4, 0, -2>, <0.4, 2, -0.5>}} */
-	/*         object {box {<-0.2, 0, -4>, <0.2, 2, -2>}} */
-	/*       } */
-	/*     } */
-	/*   } */
-	/* } */
-	/* object { */
-	/*   intersection { */
-	/*     object { */
-	/*       union { */
-	/*         object { */
-	/*           difference { */
-	/*             object {cylinder {<0,0,-1>, <0,0,-1.3>, 1.075}} */
-	/*             object {cylinder {<0,0,-0.9>, <0,0,-1.4>, 1}} */
-	/*           } */
-	/*         } */
-	/*         #declare Count = 0; */
-	/*         #while (Count < 360) */
-	/*           object {cylinder {<0,1.075, -1>, <0, 1.075, -1.3>, 0.02} rotate <0,0,Count>} */
-	/*           #declare Count=Count+2; */
-	/*         #end */
-	/*       } */
-	/*     } */
-	/*     object {plane {<0,-1,0>, 0}} */
-	/*   } */
-	/* } */
   }
   texture {xw_texture1}
 }
@@ -388,6 +336,16 @@
 	  texture {xw_texture3 pigment {color rgb 0.3}}
 	}
 	object {sphere {0*x, 0.2} scale<1,1,2> translate -0.4*z texture {xw_texture3}}
+	light_source{
+		0
+		rgb<1,0,0>
+		translate z*1.5
+	}
+	light_source{
+		0
+		rgb<1,1,0>
+		translate z*0.5
+	}
   }
 }
 
@@ -697,9 +655,8 @@
   texture {xw_texture1}
 }
 
-#ifdef (WingRotation)
-#else
-#declare WingRotation = 20;
+#ifndef (WingRotation)
+	#declare WingRotation = 20;
 #end
 
 #declare XWing = object {
